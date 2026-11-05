@@ -1,2 +1,81 @@
 @import "tailwindcss";
-@plugin "daisyui";
+
+@plugin "daisyui" {
+  themes: false;
+}
+
+@plugin "daisyui/theme" {
+  name: "bazardor";
+  default: true;
+  prefersdark: false;
+  color-scheme: light;
+
+  /* Background */
+  --color-base-100: #f4f7ef; 
+  --color-base-200: #e6eedf; 
+  --color-base-300: #d2dfc9; 
+  --color-base-content: #26352b; 
+
+  /* Brand color */
+  --color-primary: #3f7d58; 
+  --color-primary-content: #f4f7ef;
+  --color-secondary: #d8a75f; 
+  --color-secondary-content: #3a2a12;
+  --color-accent: #8db89d;
+  --color-accent-content: #1d2e24;
+  --color-neutral: #66756a;
+  --color-neutral-content: #f4f7ef;
+
+  /* Price color */
+  --color-success: #2f8a57; 
+  --color-success-content: #f4f7ef;
+  --color-error: #c0544c;
+  --color-error-content: #fff5f3;
+  --color-warning: #c98f2e;
+  --color-warning-content: #2b1d05;
+  --color-info: #5b8fb0;
+  --color-info-content: #f4f7ef;
+
+  
+  --radius-selector: 1rem;
+  --radius-field: 0.5rem;
+  --radius-box: 1rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+}
+
+/* Mobile */
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Price ticker */
+@keyframes ticker-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.ticker-track {
+  width: max-content;
+  animation: ticker-scroll 90s linear infinite;
+}
+
+.ticker:hover .ticker-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track {
+    animation-duration: 240s;
+  }
+}
