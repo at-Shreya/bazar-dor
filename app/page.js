@@ -1,8 +1,13 @@
+import Hero from "@/components/Home/Hero";
+
 export default function Home() {
   return (
-    <main className="p-10">
-      <h1 className="text-3xl font-bold">বাজার দর</h1>
-      <button className="btn btn-success mt-4">পরীক্ষা</button>
+    <main className="mx-auto max-w-6xl space-y-12 px-4 py-8 sm:py-10">
+      <Hero />
+
+      <section id="সব-পণ্য" className="scroll-mt-6">
+        <h2 className="text-2xl font-bold">সব পণ্য</h2>
+      </section>
     </main>
   );
 }

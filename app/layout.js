@@ -15,7 +15,12 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="bn" data-theme="bazardor">
+    <html
+      lang="bn"
+      data-theme="bazardor"
+      data-scroll-behavior="smooth"
+      className="scroll-smooth"
+    >
       <body
         className={`${hindSiliguri.className} min-h-screen bg-base-200 text-base-content antialiased`}
       >
