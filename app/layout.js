@@ -1,6 +1,7 @@
 import { Hind_Siliguri } from "next/font/google";
 import { Suspense } from "react";
 import AuthToastListener from "@/components/auth/AuthToastListener";
+import Footer from "@/components/Footer";
 import Navbar from "@/components/navbar/Navbar";
 import ToastProvider from "@/components/ToastProvider";
 import "./globals.css";
@@ -25,10 +26,13 @@ export default function RootLayout({ children }) {
       className="scroll-smooth"
     >
       <body
-        className={`${hindSiliguri.className} min-h-screen bg-base-200 text-base-content antialiased`}
+         className={`${hindSiliguri.className} flex min-h-screen flex-col bg-base-200 text-base-content antialiased`}
       >
         <Navbar />
-        {children}
+
+        <div className="flex-1">{children}</div>
+
+        <Footer />
 
         <ToastProvider />
         <Suspense fallback={null}>
