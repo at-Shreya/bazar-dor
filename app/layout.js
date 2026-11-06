@@ -1,5 +1,8 @@
 import { Hind_Siliguri } from "next/font/google";
+import { Suspense } from "react";
+import AuthToastListener from "@/components/auth/AuthToastListener";
 import Navbar from "@/components/navbar/Navbar";
+import ToastProvider from "@/components/ToastProvider";
 import "./globals.css";
 
 const hindSiliguri = Hind_Siliguri({
@@ -26,6 +29,11 @@ export default function RootLayout({ children }) {
       >
         <Navbar />
         {children}
+
+        <ToastProvider />
+        <Suspense fallback={null}>
+          <AuthToastListener />
+        </Suspense>
       </body>
     </html>
   );
