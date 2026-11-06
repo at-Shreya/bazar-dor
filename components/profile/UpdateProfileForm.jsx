@@ -66,7 +66,7 @@ export default function UpdateProfileForm({ currentName }) {
         <button
           type="submit"
           disabled={loading}
-          className="btn btn-primary shadow-sm sm:flex-[2]"
+          className="btn btn-primary shadow-sm sm:flex-2"
         >
           {loading && <span className="loading loading-spinner loading-sm" />}
           {loading ? "আপডেট হচ্ছে..." : "তথ্য আপডেট করুন"}
