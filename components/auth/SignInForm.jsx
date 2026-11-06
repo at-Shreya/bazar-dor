@@ -14,7 +14,7 @@ export default function SignInForm({ redirectTo, loginRequired, socialError }) {
 
   useEffect(() => {
     if (loginRequired) {
-      toast("পণ্যের বিস্তারিত দেখতে আগে সাইন ইন করুন।", {
+        toast("এই পেজ দেখতে আগে সাইন ইন করুন।", {
         id: "login-required",
         icon: "🔒",
       });
