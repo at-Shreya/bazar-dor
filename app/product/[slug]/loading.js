@@ -1,4 +1,3 @@
-// Details পেজের ডেটা আসা পর্যন্ত এই skeleton দেখাবে
 export default function ProductDetailsLoading() {
   return (
     <main

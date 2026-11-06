@@ -1,6 +1,5 @@
 import Link from "next/link";
 
-// হোম › চাল › বাটাম সাইজ চাল
 export default function ProductBreadcrumbs({ product }) {
   return (
     <nav aria-label="Breadcrumb" className="breadcrumbs text-sm text-base-content/70">

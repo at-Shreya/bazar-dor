@@ -26,7 +26,6 @@ export default function MarketPriceTable({ rows }) {
               <tr key={row.market}>
                 <td>
                   <span className="font-medium">{row.market}</span>
-                  {/* মোবাইলে বিভাগ কলাম লুকানো, তাই নামের নিচে ছোট করে দেখাবে */}
                   <span className="block text-xs text-base-content/55 sm:hidden">
                     {row.division}
                   </span>
