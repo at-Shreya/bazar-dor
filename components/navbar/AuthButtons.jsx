@@ -1,15 +1,38 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+import { authClient } from "@/lib/auth-client";
 
 export default function AuthButtons() {
-  // BetterAuth add 
-  const user = null;
+  const router = useRouter();
+  const { data: session, isPending } = authClient.useSession();
+  const user = session?.user;
 
-  const handleSignOut = () => {
+  const handleSignOut = async () => {
+    document.activeElement?.blur();
+
+    const { error } = await authClient.signOut();
+    if (error) {
+      toast.error("সাইন আউট করা যায়নি। আবার চেষ্টা করুন।");
+      return;
+    }
+
+    toast.success("সফলভাবে সাইন আউট হয়েছে।");
+    router.push("/");
+    router.refresh();
   };
 
-  // Sign in and sign up
+  if (isPending) {
+    return (
+      <div className="flex items-center gap-2" aria-label="লোড হচ্ছে">
+        <div className="skeleton size-8 rounded-full" />
+        <div className="skeleton hidden h-4 w-20 sm:block" />
+      </div>
+    );
+  }
+
   if (!user) {
     return (
       <div className="flex items-center gap-2">
@@ -23,7 +46,6 @@ export default function AuthButtons() {
     );
   }
 
-  // dropdown
   return (
     <div className="dropdown dropdown-end">
       <div
@@ -44,7 +66,9 @@ export default function AuthButtons() {
             {user.name?.charAt(0) ?? "?"}
           </span>
         )}
-        <span className="hidden font-medium sm:inline">{user.name}</span>
+        <span className="hidden max-w-32 truncate font-medium sm:inline">
+          {user.name}
+        </span>
         <span aria-hidden="true" className="text-xs opacity-60">
           ▾
         </span>
@@ -52,8 +76,9 @@ export default function AuthButtons() {
 
       <ul
         tabIndex={-1}
-        className="dropdown-content menu z-50 mt-2 w-48 rounded-box border border-base-300 bg-base-100 p-2 shadow-md"
+        className="dropdown-content menu z-50 mt-2 w-52 rounded-box border border-base-300 bg-base-100 p-2 shadow-md"
       >
+        <li className="menu-title truncate px-3 text-xs font-normal">{user.email}</li>
         <li>
           <Link href="/my-profile">আমার প্রোফাইল</Link>
         </li>

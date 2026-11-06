@@ -1,13 +1,15 @@
-import { notFound } from "next/navigation";
+import { headers } from "next/headers";
+import { notFound, redirect } from "next/navigation";
 import MarketPriceTable from "@/components/product/MarketPriceTable";
 import PriceSummary from "@/components/product/PriceSummary";
 import ProductBreadcrumbs from "@/components/product/ProductBreadcrumbs";
 import ProductHeader from "@/components/product/ProductHeader";
 import { getProductBySlug } from "@/lib/api";
+import { auth } from "@/lib/auth";
 import { unitBn } from "@/lib/format";
 import { getMarketStats } from "@/lib/products";
 
-// ব্রাউজারের ট্যাবে পণ্যের নাম দেখাবে
+
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const product = await getProductBySlug(slug);
@@ -23,11 +25,16 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function ProductDetailsPage({ params }) {
-  // Next.js 16-এ params একটা Promise, তাই await করতে হয়
   const { slug } = await params;
+
+  const session = await auth.api.getSession({ headers: await headers() });
+  if (!session) {
+    redirect(`/signin?redirect=${encodeURIComponent(`/product/${slug}`)}`);
+  }
+  
   const product = await getProductBySlug(slug);
 
-  // ভুল slug হলে 404 পেজ দেখাবে
+  // 404 page
   if (!product) {
     notFound();
   }
